@@ -12,7 +12,9 @@ function useTopRatedMovies() {
     }
 
     useEffect(() => {
-        getTopRatedMovies()
+        if (!userContext.topRatedmovies) {
+            getTopRatedMovies()
+        }
     }, [])
 }
 

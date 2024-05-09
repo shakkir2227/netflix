@@ -12,7 +12,8 @@ function useNowPlayingMovies() {
     }
 
     useEffect(() => {
-        getNowPlayingMovies()
+        if (!userContext.movies)
+            getNowPlayingMovies()
     }, [])
 }
 
