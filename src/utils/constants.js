@@ -9,3 +9,4 @@ export const  API_TMDB = {
         Authorization: process.env.REACT_APP_TMDB_AUTHORISATION_KEY
     }
 }
+export const IMG_CDN = "https://image.tmdb.org/t/p/w500"

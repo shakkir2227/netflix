@@ -1,4 +1,6 @@
 const authReducer = (currentState, action) => {
+    console.log(action.type);
+    console.log(action.topRatedMovies);
     switch (action.type) {
         case "login": return ({
             ...currentState,
@@ -17,7 +19,12 @@ const authReducer = (currentState, action) => {
             ...currentState,
             movies: action.movies
         })
-    }   
+
+        case "addTopRatedMovies": return ({
+            ...currentState,
+            topRatedmovies: action.topRatedMovies
+        })
+    }
 }
 
 export default authReducer

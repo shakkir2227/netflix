@@ -8,7 +8,8 @@ const MainContainer = () => {
     const { movies } = useContext(UserContext);
     if (!movies) return
 
-    const mainMovie = movies.results[0]
+
+    const mainMovie = movies.results[1]
     const { original_title, overview, id } = mainMovie;
     return (
         <div>

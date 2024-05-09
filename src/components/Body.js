@@ -25,7 +25,7 @@ const Body = () => {
 
     return (
         <div>
-            <UserContext.Provider value={{ email: state?.email, dispatch, uid: state?.uid, displayName: state?.displayName, movies: state?.movies }}>
+            <UserContext.Provider value={{ email: state?.email, dispatch, uid: state?.uid, displayName: state?.displayName, movies: state?.movies, topRatedmovies: state?.topRatedmovies }}>
                 <RouterProvider router={appRouter} />
             </UserContext.Provider>
         </div>
