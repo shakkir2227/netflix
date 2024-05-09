@@ -4,7 +4,6 @@ import { API_TMDB } from "../utils/constants"
 
 function useNowPlayingMovies() {
     const userContext = useContext(UserContext)
-    console.log(userContext.movies);
 
     const getNowPlayingMovies = async () => {
         const response = await fetch('https://api.themoviedb.org/3/movie/now_playing?page=1', API_TMDB)
