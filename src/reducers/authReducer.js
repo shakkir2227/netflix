@@ -12,6 +12,11 @@ const authReducer = (currentState, action) => {
             name: "",
             email: "",
         })
+
+        case "addNowPlayingMovies": return ({
+            ...currentState,
+            movies: action.movies
+        })
     }   
 }
 
