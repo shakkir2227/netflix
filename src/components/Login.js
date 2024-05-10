@@ -4,7 +4,7 @@ import { checkValidata } from '../utils/validate'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { auth } from '../utils/firebase'
 import { UserContext } from '../utils/context'
-import { BG_IMG} from '../utils/constants'
+import { BG_IMG } from '../utils/constants'
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true)
@@ -20,10 +20,7 @@ const Login = () => {
         setIsSignInForm(!isSignInForm)
     }
 
-    const handleLoginAndNavigate = (uid, displayName, email) => {
-        data.dispatch({ type: "login", uid, displayName, email });
-    }
-
+   
     function handleButtonClick() {
         // clear the old error message
         setErrorMessage(null)
@@ -34,16 +31,20 @@ const Login = () => {
         // if error is there, return
         if (message) return
 
-        if (!isSignInForm) { //sign up logic
+        if (!isSignInForm) {
             createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // // Signed up        
                     const user = userCredential.user;
+                    const { uid, email } = user;
+                    data.dispatch({ type: "login", uid, email })
+
                     updateProfile(user, {
                         displayName: name.current.value,
                     }).then(() => {
-                        const { uid, email, displayName } = auth.currentUser
-                        handleLoginAndNavigate(uid, displayName, email);
+                        const { displayName } = auth.currentUser
+                        data.dispatch({ type: "update", displayName })
+
                     }).catch((error) => {
                         // An error occurred
                         const errorCode = error.code;
@@ -64,8 +65,6 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    const { uid, email, displayName } = user;
-                    data.dispatch({ type: "login", uid, email, displayName })
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -79,7 +78,7 @@ const Login = () => {
         <div>
             <Header />
             <div className='absolute'>
-                <img src= {BG_IMG}
+                <img src={BG_IMG}
                     alt='logo'></img>
             </div>
             <form onSubmit={(e) => { e.preventDefault() }} className='w-5/12 absolute p-12 bg-black my-16 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-70' >

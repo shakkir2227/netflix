@@ -1,6 +1,5 @@
 const authReducer = (currentState, action) => {
-    console.log(action.type);
-    console.log(action.topRatedMovies);
+    
     switch (action.type) {
         case "login": return ({
             ...currentState,
@@ -9,8 +8,14 @@ const authReducer = (currentState, action) => {
             email: action.email,
         })
 
+        case "update": return ({
+            ...currentState,
+            displayName: action.displayName,
+        })
+
         case "logout": return ({
             ...currentState,
+            uid: "",
             name: "",
             email: "",
         })

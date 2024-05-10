@@ -16,6 +16,7 @@ const Header = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
       userContext.dispatch({ type: "logout" })
+      navigate("/")
     }).catch((error) => {
       // An error happened.
     });
@@ -24,8 +25,10 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in      
+        const { uid, email } = user
+        userContext.dispatch({ type: "login", uid, email })
         navigate("/browse")
+        // User is signed in      
       } else {
         navigate("/")
       }
